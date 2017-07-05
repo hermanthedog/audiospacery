@@ -1,24 +1,26 @@
 import React, { Component, PropTypes } from 'react';
-import Guides from '../Guides/Guides';
+import GuidesSearch from '../Guides/GuidesSearch';
 import PopularGuides from '../Guides/Guides';
 import { fetchGuides } from '../Guides/GuidesActions';
 import styles from './Wrapper.css';
-
+import DevTools from '../App/components/DevTools';
 
 class Wrapper extends Component {
+	
 	componentDidMount() {
 		this.props.dispatch(fetchGuides());
-	}
+		
+		//console.log(props.searchInGuides);
+	} 
 
-	handleSearch=()=>{
-		console.log('search');
-	}
+	handleProps=()=>{
+		console.log(this.props);
+	} 
 	
 	render() {  
 		return (				 
 				<div className={styles.Wrapper}>
-					<input type="text" onChange={this.handleSearch}/>
-					<Guides guides={this.props.guides}/>
+					<GuidesSearch />
 				</div> 
 		);
 	}

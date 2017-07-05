@@ -5,9 +5,10 @@ import Guide from './Guide';
 //import styles from './Guides.css';
 
 const Guides = (props) => {	
+		console.log('guidesprops' + props.guides);
 		return (
 			<div>
-				{props.guides.map(guide=> <Guide key={guide.id} guide={guide}/>)}
+				{props.guides.map(guide => <Guide key={guide.id} guide={guide}/>)}
 			</div>
 		);
 }

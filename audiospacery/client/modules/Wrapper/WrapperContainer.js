@@ -8,7 +8,7 @@ Wrapper.need = [() => { return fetchGuides(); }];
 
 function mapStateToProps(state){ 
 	  return {
-		  guides: getGuides(state)
+		  guides: getGuides(state),
 	}
 }
 

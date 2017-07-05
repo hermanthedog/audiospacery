@@ -41,3 +41,15 @@
 	float: right;
 	border: none;
 }
+
+.GuidesSearch{
+	width: 100px;
+	height: 70px;
+	margin: 0 auto;
+}
+
+.GuidesSearch input{
+	margin: 0 auto;
+	width: 100px;
+	border-bottom: red;
+}

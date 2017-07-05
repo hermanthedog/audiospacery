@@ -4,10 +4,12 @@ import { bindActionCreators } from 'redux';
 import { Link } from 'react-router'
 import AddGuide from '../AddGuide/AddGuide';
 import styles from './Menu.css';
+import DevTools from '../App/components/DevTools';
 
 const Menu =(props)=>{
     return (
 		<div>
+			<DevTools/>
 			<ul>
 				<li><Link to="/">Start</Link></li>
 				<li><Link to="/guides">Przewodniki</Link></li>

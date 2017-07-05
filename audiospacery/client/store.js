@@ -1,21 +1,36 @@
-/**
- * Main store function
- */
-
- 
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import DevTools from './modules/App/components/DevTools';
 import rootReducer from './reducers';
-import { reducer as reduxFormReducer } from 'redux-form';
+import { reduxSearch } from 'redux-search';
+import { composeWithDevTools } from "redux-devtools-extension";
+
 
 export function configureStore(initialState = {}) {
-  // Middleware and store enhancers
-  const enhancers = [
+	
+
+	const enhancers = [
 			applyMiddleware(thunk),
-			 
+			reduxSearch({
+				resourceIndexes: {
+				/*	guides: ({ guides, indexDocument, state }) => {
+						guides.forEach(guide => {
+							indexDocument(guide.id, guide.title);
+							indexDocument(guide.id, guide.description);
+					});
+				}
+					
+					*/ guides: ['author', 'description', 'localisation', 'title']
+					
+				},
+				
+				resourceSelector: (resourceName, state) => {
+					return state[resourceName]
+				}
+							
+			})
 		
-  ];
+  ];  
 
   if (process.env.CLIENT && process.env.NODE_ENV === 'development') {
     // Enable DevTools only when rendering on client and during development.
