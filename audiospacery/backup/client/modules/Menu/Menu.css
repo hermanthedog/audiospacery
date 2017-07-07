@@ -1,0 +1,31 @@
+.Menu{
+	width: 100vw;
+	margin: 0 auto;
+}
+
+ul{
+	list-style: none;
+	background: slateblue;
+	color: white;
+	height: 50px;
+	padding-top: 15px;
+	text-align: center;
+	
+}
+
+li{
+	display: inline;
+}
+
+li a{
+	text-decoration: none;
+	color: white;
+	padding: 10px;
+	font-size: 18px;
+	font-weight: 800;
+}
+
+li a:hover{
+	color: gainsboro;
+	transition: .2s;
+}
