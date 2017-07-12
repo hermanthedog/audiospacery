@@ -4,6 +4,32 @@ export const CREATE_GUIDES = 'CREATE_GUIDES';
 export const CREATE_GUIDE = 'CREATE_GUIDE';
 export const CREATE_POPULAR_GUIDES = 'CREATE_POPULAR_GUIDES';
 export const SEARCH_GUIDES = 'SEARCH_GUIDES';
+export const SET_LOCATION = 'SET_LOCATION';
+export const IS_PAID = 'IS_PAID';
+export const FILE_FORMAT = 'FILE_FORMAT';
+
+
+
+export function setLocation(name){
+	return {
+		type: SET_LOCATION,
+		name
+	}
+}
+
+export function isPaid(name){
+	return{
+		type: IS_PAID, 
+		name
+	}
+}
+
+export function setFormat(name){
+	return{
+		type: FILE_FORMAT,
+		name
+	}
+}
 
 export function createGuides(guides) {
   return {

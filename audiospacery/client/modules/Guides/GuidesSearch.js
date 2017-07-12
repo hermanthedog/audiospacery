@@ -1,48 +1,92 @@
 import React, { Component, PropTypes } from 'react';
-import styles from './Guides.css';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { createSearchAction, getSearchSelectors } from 'redux-search';
+import { setLocation , isPaid , setFormat} from './GuidesActions';
+import paidGuide from './isPaidReducer';
+import selectLocation  from  './selectReducer';
+import guideFormat from  './fileFormatReducer';
+import { getGuidesByResult, getGuidesByLocation } from '../Wrapper/WrapperSelector';
 import _ from 'lodash';
 import DevTools from '../App/components/DevTools';
 import Guide from './Guide';
+import styles from './Guides.css';
 
 
 class GuidesSearch extends Component {
 	constructor(props){
 		super(props);
 		this.searchGuides = this.props.searchGuides.bind(this);
-		//this.state = {
-		//	search:''
-		//}
+		this.setLocation = this.props.setLocation.bind(this);
+		this.isPaid = this.props.isPaid.bind(this);
+		this.setFormat = this.props.setFormat.bind(this);
 	}
 	
-	componentWillMount(){
-		this.props.dispatch(this.searchGuides(' '));		
+	componentDidMount(){
+		this.props.dispatch(this.searchGuides(''));		
 	}
 	
-	
-	
+
 	render(){
-		const { results, guideFrom } = this.props;
-		
-		return (<div>
-			<div className={styles.GuidesSearch}>
-				<input type="text" onChange={
-					event => {this.props.dispatch(this.searchGuides(event.target.value))
-				}}/>
+		console.log(this.props);
+		const { results, guideFrom , guideFormat, selectLocation , paidGuide ,guidesResult} = this.props;
+		let citiesArr = _.uniq(guideFrom.map(guide=>{
+			return(guide.localisation)}))
+		let formatsArr = _.uniq(guideFrom.map(guide=>{
+			return(guide.format)}))
 				
-				{guideFrom.map(guide=>{if(results.indexOf(guide.id)!==-1)
-					{
-						return(
-							<Guide key={guide.id} guide={guide}/>
-						)					} 
+		return (
+		<div className={styles.GuidesSearch}>
+			<div className={styles.GuidesSearchInputWrapper}>
+				<div className={styles.GuidesSearchInput}>
+					<h4>Miasto</h4>
+					<select onChange={event=> this.props.dispatch(this.setLocation(event.target.value))} value={selectLocation} >
+						<option value='' >Pokaż wszystkie...</option>
+						{citiesArr.map(city=>{
+							return(<option key={city} value={city}>{city}</option>)
+							} 
+						)}			
+					</select>
+				</div>
+				<div className={styles.GuidesSearchInput}>
+					<h4>Szukaj</h4>
+					<input type="text" onChange={
+						event => {this.props.dispatch(this.searchGuides(event.target.value))
+					}}/>
+				</div>
+				<div className={styles.GuidesSearchInput}>
+					<h4>Płatny</h4>
+					<input id="checkb" type="checkbox" onChange={ event =>this.props.dispatch(this.isPaid(event.target.checked))} checked={paidGuide}/>
+				</div>
+				<div className={styles.GuidesSearchInput}>
+					<h4>Format</h4>
+					<select onChange={event=> this.props.dispatch(this.setFormat(event.target.value))} value={guideFormat} >
+						<option value='' >Pokaż wszystkie...</option>
+						{formatsArr.map(format=>{
+							return(<option key={format} value={format}>{format}</option>)
+							} 
+						)}			
+					</select>
+				</div>
+				
+			</div>
+			<div>
+
+				{guidesResult.map(guide=>{
+					if( 
+						(selectLocation === '' || guide.localisation.toLowerCase() === selectLocation.toLowerCase()) &&
+						(paidGuide=== false || guide.paid === 'true') &&
+						(guideFormat === '' || guide.format === guideFormat)
+					)
+					{ 	
+						return(<Guide key={guide.id} guide={guide}/>)
+					} 
 					})
 				}
-				
-	
-				</div>
-				</div>
+			}
+			</div>
+					
+		</div>
 		)
 	}
 }
@@ -50,45 +94,32 @@ GuidesSearch.propTypes = {
 };
 
 const guides = state => state;
-// :text is a selector that returns the text Books are currently filtered by
-// :result is an Array of Book ids that match the current seach :text (or all Books if there is no search :text)
-/*const { text, result } = getSearchSelectors({
-	resourceName: 'guides',
-	resourceSelector: 
-		(resourceName, state) => state[resourceName]
-})
 
-
-*/
-
-
-
-const {
-  text, // search text
-  result // ids
-} = getSearchSelectors({
+const { text, result } = getSearchSelectors({
   resourceName: 'guides',
   resourceSelector: (resourceName, state) => {return state[resourceName]}
 });
-	
+
 const mapStateToProps = (state)=>{
+	const { paidGuide, selectLocation, guides, guideFormat } = state; 
 	return { 
-		results: state.search.guides.result, 
-		guideFrom: Object.values(state.guides)
+		
+		paidGuide: paidGuide,
+		selectLocation: selectLocation, 
+		//results: state.search.guides.result, 
+		guideFrom: Object.values(guides),
+		guidesResult: getGuidesByResult(state),
+		guideFormat: guideFormat,
+		//getGuidesByLocation: getGuidesByLocation(state)
 	}
-}
-
-
-/*const mapStateToProps = (state)=>({
-	state.guides.search.result
-	  })
-	  */
-	  
-	  
+} 
+  
 const mapDispatchToProps = (dispatch) => ({
+	setFormat,
+	setLocation,
+	isPaid, 
 	searchGuides: createSearchAction('guides'),
 	dispatch
   });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(GuidesSearch)

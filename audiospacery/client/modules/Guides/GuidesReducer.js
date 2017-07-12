@@ -1,4 +1,4 @@
-import { CREATE_GUIDE, CREATE_GUIDES, SEARCH_GUIDES , CREATE_POPULAR_GUIDES} from './GuidesActions';
+import { CREATE_GUIDE, CREATE_GUIDES, SEARCH_GUIDES , CREATE_POPULAR_GUIDES, SET_LOCATION } from './GuidesActions';
 
 
 const initialState = {}; 
@@ -13,6 +13,8 @@ const GuidesReducer = (state = initialState, action) => {
       return state;
   } 
 };
+
+
 
 
 

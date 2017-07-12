@@ -8,7 +8,7 @@ import DevTools from '../App/components/DevTools';
 
 const Menu =(props)=>{
     return (
-		<div>
+		<div className={styles.Menu}>
 			<DevTools/>
 			<ul>
 				<li><Link to="/">Start</Link></li>

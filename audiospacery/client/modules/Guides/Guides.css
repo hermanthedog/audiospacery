@@ -3,8 +3,8 @@
 	width: 600px;
 	list-style-type:none;
 	box-shadow: 0px 0px 8px silver;
-	margin: 10px auto;
 	padding: 10px;
+	margin:  0 auto;
 	
 }
 
@@ -43,13 +43,45 @@
 }
 
 .GuidesSearch{
-	width: 100px;
-	height: 70px;
+	width: 100%;
 	margin: 0 auto;
 }
 
-.GuidesSearch input{
+
+
+.GuidesSearchInputWrapper{
+	width: 50%;
+	height: 80px;
 	margin: 0 auto;
-	width: 100px;
-	border-bottom: red;
 }
+
+.GuidesSearchInput{
+	margin: 20px;
+	width: 190px;
+	height: 50px;
+	float: left;
+}
+
+.GuidesSearchInput h4{
+	text-align: center;
+}
+
+.GuidesSearchInput input{
+	width: 120px;
+	margin: 5px auto;
+}
+
+.GuidesSearchInput select{
+	display: block;
+	margin: 5px auto;
+	width: 120px;
+	height: 20px;
+	
+}
+
+
+.GuidesSearchInputWrapper label{
+	float: left;
+}
+
+ 

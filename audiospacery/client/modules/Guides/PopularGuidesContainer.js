@@ -1,11 +1,11 @@
 import PopularGuides from './PopularGuides';
 import { connect } from 'react-redux';
-import { getPopularGuides } from '../Wrapper/PopularGuidesSelector';
+import { getPopGuides } from '../Wrapper/WrapperSelector';
 
-function mapStateToProps(state){ 
-	  return {
-		  guidesPop: getPopularGuides(state)
-	}
+function mapStateToProps(state){
+	return {
+		guidesPop: getPopGuides(state)
+		}
 }
 
 export default connect(mapStateToProps)(PopularGuides);
