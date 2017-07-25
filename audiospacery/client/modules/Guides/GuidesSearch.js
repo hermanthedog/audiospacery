@@ -2,15 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { createSelector } from 'reselect';
 import { createSearchAction, getSearchSelectors } from 'redux-search';
-import { setLocation , isPaid , setFormat} from './GuidesActions';
+import { setLocation , isPaid , setFormat } from './GuidesActions';
 import paidGuide from './isPaidReducer';
 import selectLocation  from  './selectReducer';
 import guideFormat from  './fileFormatReducer';
-import { getGuidesByResult, getGuidesByLocation } from '../Wrapper/WrapperSelector';
+import { getGuidesByResult, filterGuides } from '../Wrapper/WrapperSelector';
 import _ from 'lodash';
-import DevTools from '../App/components/DevTools';
 import Guide from './Guide';
 import styles from './Guides.css';
+import Maps from '../Maps/MapsContainer'
 
 
 class GuidesSearch extends Component {
@@ -28,15 +28,17 @@ class GuidesSearch extends Component {
 	
 
 	render(){
-		console.log(this.props);
-		const { results, guideFrom , guideFormat, selectLocation , paidGuide ,guidesResult} = this.props;
-		let citiesArr = _.uniq(guideFrom.map(guide=>{
+		
+		const { filterGuides, results, guideFrom , guideFormat, selectLocation , paidGuide ,guidesResult} = this.props;
+		let citiesArr = _.uniq(filterGuides.map(guide=>{
 			return(guide.localisation)}))
-		let formatsArr = _.uniq(guideFrom.map(guide=>{
+		let formatsArr = _.uniq(filterGuides.map(guide=>{
 			return(guide.format)}))
 				
 		return (
+
 		<div className={styles.GuidesSearch}>
+		{console.log(this.props)}
 			<div className={styles.GuidesSearchInputWrapper}>
 				<div className={styles.GuidesSearchInput}>
 					<h4>Miasto</h4>
@@ -68,24 +70,19 @@ class GuidesSearch extends Component {
 						)}			
 					</select>
 				</div>
-				
 			</div>
-			<div>
-
-				{guidesResult.map(guide=>{
-					if( 
-						(selectLocation === '' || guide.localisation.toLowerCase() === selectLocation.toLowerCase()) &&
-						(paidGuide=== false || guide.paid === 'true') &&
-						(guideFormat === '' || guide.format === guideFormat)
-					)
-					{ 	
-						return(<Guide key={guide.id} guide={guide}/>)
-					} 
+			<div className={styles.MapsWrapper}>
+				<Maps getGuides={filterGuides}/>
+			</div>
+			<div className={styles.GuidesView}>
+				{
+					filterGuides.map(guide=>{
+						{ 	
+							return(<Guide key={guide.id} guide={guide}/>)
+						} 
 					})
 				}
-			}
 			</div>
-					
 		</div>
 		)
 	}
@@ -100,24 +97,22 @@ const { text, result } = getSearchSelectors({
   resourceSelector: (resourceName, state) => {return state[resourceName]}
 });
 
-const mapStateToProps = (state)=>{
-	const { paidGuide, selectLocation, guides, guideFormat } = state; 
+const mapStateToProps = (state) =>{
+	const { paidGuide, selectLocation, guides, guideFormat  } = state; 
 	return { 
-		
 		paidGuide: paidGuide,
 		selectLocation: selectLocation, 
-		//results: state.search.guides.result, 
 		guideFrom: Object.values(guides),
 		guidesResult: getGuidesByResult(state),
 		guideFormat: guideFormat,
-		//getGuidesByLocation: getGuidesByLocation(state)
+		filterGuides: filterGuides(state)
 	}
 } 
   
 const mapDispatchToProps = (dispatch) => ({
 	setFormat,
 	setLocation,
-	isPaid, 
+	isPaid,
 	searchGuides: createSearchAction('guides'),
 	dispatch
   });

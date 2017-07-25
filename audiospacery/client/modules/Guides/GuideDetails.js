@@ -3,14 +3,13 @@ import styles from './Guides.css';
 
 const GuideDetails = (props) =>{
     return(
-		<div className={styles.GuideDetails}>
-			<h5>{props.details.description}</h5>
-			<p>format:{props.details.format}</p>
-			<p>płatny:{props.details.paid}</p>
-			<p>cena: {props.details.price}</p>
-			<p>autor:{props.details.author}</p>
-			<p>{props.details.language}</p>
-			<p>rating:{props.details.rating}</p>
+    	<div className={styles.GuideDetailsWrapper}>
+			<div className={styles.GuideDetails}>
+				<h4>{props.details.description}</h4>
+				<p><strong>format:</strong>{props.details.format}, <strong>płatny:</strong>{props.details.paid}</p>
+				<p><strong>cena: </strong>{props.details.price}, <strong>autor:</strong>{props.details.author}</p>
+				<p><strong>język:</strong>{props.details.language}, <strong>rating:</strong>{props.details.rating}</p>
+			</div>
 		</div>
 	)
 }	

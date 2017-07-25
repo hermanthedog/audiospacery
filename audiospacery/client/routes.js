@@ -4,8 +4,11 @@ import { Route, IndexRoute } from 'react-router';
 import Wrapper from './modules/Wrapper/WrapperContainer';
 import AddGuide from './modules/AddGuide/AddGuide';
 import Guides from './modules/Guides/Guides';
+import GuideDetailPage from './modules/Guides/GuideDetailPage';
 import PopularGuides from './modules/Guides/PopularGuidesContainer';
 import Menu from './modules/Menu/Menu';
+import Maps from './modules/Maps/MapsContainer';
+
 
 // require.ensure polyfill for node
 if (typeof require.ensure !== 'function') {
@@ -23,8 +26,10 @@ if (process.env.NODE_ENV !== 'production') {
   
 	require('./modules/AddGuide/AddGuide');
 	require('./modules/Wrapper/WrapperContainer');
-	require('./modules/Menu/Menu');
+  require('./modules/Menu/Menu');
+	require('./modules/Maps/MapsContainer');
 	require('./modules/Guides/PopularGuidesContainer');
+  require('./modules/Guides/GuideDetailPage')
   }
 
 
@@ -46,6 +51,13 @@ export default (
           cb(null, require('./modules/AddGuide/AddGuide').default);
         });
       }}
+    /><Route
+      path="/maps" component = { Maps }
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Maps/MapsContainer').default);
+        });
+      }}
     />
 	<Route
       path="/guides" component = { Wrapper }
@@ -60,6 +72,13 @@ export default (
       getComponent={(nextState, cb) => {
         require.ensure([], require => {
           cb(null, require('./modules/Guides/PopularGuidesContainer').default);
+        });
+      }}
+    /><Route
+      path="/guides/:id" component = { GuideDetailPage }
+      getComponent={(nextState, cb) => {
+        require.ensure([], require => {
+          cb(null, require('./modules/Guides/GuideDetailPage').default);
         });
       }}
     />

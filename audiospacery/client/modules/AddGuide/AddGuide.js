@@ -42,64 +42,88 @@ class AddGuide extends Component{
 		
 		return (
 			<form onSubmit={handleSubmit(this.submit.bind(this))}>
-			  <div>
-				<label>Tytuł</label>
 				<div>
-				  <Field name="title" component="input" type="text" placeholder="tytuł"/>
+					
+					<div className={styles.formField}>
+						<label>Tytuł</label>
+						 <Field name="title" component="input" type="text" placeholder="tytuł"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Miejsce</label>
+						 <Field name="localisation" component="input" type="text" placeholder="miejsce"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Format</label>
+						<Field name="format" component="input" type="text" placeholder="format"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Płatny</label>
+					  	<Field name="paid" component="input" type="text" placeholder="płatny"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Cena:</label>
+					  	<Field name="price" component="input" type="text" placeholder="cena"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Autor</label>
+					  	<Field name="author" component="input" type="text" placeholder="autor"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Opis</label>
+					  	<Field name="description" component="textarea" type="text" placeholder="opis"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Język</label>
+					  	<Field name="language" component="input" type="text" placeholder="język"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Link</label>
+					  	<Field name="link" component="input" type="text" placeholder="link"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Audio</label>
+						<Field name="audio" component="input" type="text" placeholder="audio"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Zdjęcie</label>
+						<Field name="photo" component="input" type="text" placeholder="foto"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Okładka</label>
+					  	<Field name="cover" component="input" type="text" placeholder="cover"/>
+					</div>
+					
+					<div className={styles.formField}>
+						<label>Rating</label>
+					  	<Field name="rating" component="input" type="text" placeholder="rating"/>
+					</div>
+					<div className={styles.formField}>
+						<label>Lat</label>
+						<Field name="lat" component="input" type="text" placeholder="lat"/>
+					</div>
+					<div className={styles.formField}>
+						<label>Lng</label>
+						<Field name="lng" component="input" type="text" placeholder="lng"/>
+					</div>
+
+
 				</div>
-				<label>Miejsce</label>
-				<div>
-				  <Field name="localisation" component="input" type="text" placeholder="miejsce"/>
+				<div className={styles.formField}>
+					<h4>DODAJ</h4>
+					<button type="submit" >Submit</button>
+					<button type="button" disabled={pristine || submitting} onClick={reset}>Wyczyść</button>
 				</div>
-				<label>Format</label>
-				<div>
-				  <Field name="format" component="input" type="text" placeholder="format"/>
-				</div>
-				<label>Płatny</label>
-				<div>
-				  <Field name="paid" component="input" type="text" placeholder="płatny"/>
-				</div>
-				<label>Cena:</label>
-				<div>
-				  <Field name="price" component="input" type="text" placeholder="cena"/>
-				</div>
-				<label>Autor</label>
-				<div>
-				  <Field name="author" component="input" type="text" placeholder="autor"/>
-				</div>
-				<label>Opis</label>
-				<div>
-				  <Field name="description" component="textarea" type="text" placeholder="opis"/>
-				</div>
-				<label>Język</label>
-				<div>
-				  <Field name="language" component="input" type="text" placeholder="język"/>
-				</div>
-				<label>Link</label>
-				<div>
-				  <Field name="link" component="input" type="text" placeholder="link"/>
-				</div>
-				<label>Audio</label>
-				<div>
-				  <Field name="audio" component="input" type="text" placeholder="audio"/>
-				</div>
-				<label>Zdjęcie</label>
-				<div>
-				  <Field name="photo" component="input" type="text" placeholder="foto"/>
-				</div>
-				<label>Okładka</label>
-				<div>
-				  <Field name="cover" component="input" type="text" placeholder="cover"/>
-				</div>
-				<label>Rating</label>
-				<div>
-				  <Field name="rating" component="input" type="text" placeholder="rating"/>
-				</div>
-			  </div>
-			  <div>
-				<button type="submit" >Submit</button>
-				<button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
-			  </div>
 			</form>
 		)
 	}

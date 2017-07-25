@@ -53,6 +53,12 @@ const guidesSchema = new Schema({
 	rating: {
 		type: 'Number',
 		//required: true, 
+	},
+	lat: {
+		type: 'Number',
+	},
+	lng: {
+		type: 'Number',
 	}
 	
 });

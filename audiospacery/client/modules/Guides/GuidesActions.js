@@ -7,12 +7,34 @@ export const SEARCH_GUIDES = 'SEARCH_GUIDES';
 export const SET_LOCATION = 'SET_LOCATION';
 export const IS_PAID = 'IS_PAID';
 export const FILE_FORMAT = 'FILE_FORMAT';
+export const SELECTED_GUIDE = 'SELECTED_GUIDE';
+export const TOGGLE_VIEW = "TOGGLE_VIEW";
+export const SET_MAP_BOUNDS = "SET_MAP_BOUNDS";
 
+export function setBounds(obj){
+	return{
+		type: SET_MAP_BOUNDS,
+		obj
+	} 
+}
 
+export function toggleView(name){
+	return{
+		type: TOGGLE_VIEW,
+		name
+	}
+}
 
 export function setLocation(name){
 	return {
 		type: SET_LOCATION,
+		name
+	}
+}
+
+export function setGuide(name){
+	return {
+		type: SELECTED_GUIDE,
 		name
 	}
 }
@@ -85,7 +107,9 @@ export function createGuideDB(guide) {
 				audio: guide.audio,
 				cover: guide.cover,
 				link: guide.link,
-				rating: guide.rating
+				rating: guide.rating,
+				lat: guide.lat,
+				lng: guide.lng
 			}) 
 			.then(res => {
 				dispatch(createGuide(res.saved));

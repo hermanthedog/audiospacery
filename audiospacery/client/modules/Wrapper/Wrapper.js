@@ -3,7 +3,7 @@ import GuidesSearch from '../Guides/GuidesSearch';
 import PopularGuides from '../Guides/Guides';
 import { fetchGuides } from '../Guides/GuidesActions';
 import styles from './Wrapper.css';
-import DevTools from '../App/components/DevTools';
+ 
 
 class Wrapper extends Component {
 	

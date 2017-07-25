@@ -13,6 +13,7 @@ const Menu =(props)=>{
 			<ul>
 				<li><Link to="/">Start</Link></li>
 				<li><Link to="/guides">Przewodniki</Link></li>
+				<li><Link to="/maps">Mapa</Link></li>
 				<li><Link to="/popularguides">Top</Link></li>
 				<li><Link to="/addguide">Dodaj Nowy</Link></li>
 			</ul>
